@@ -50,7 +50,7 @@ class StyleAugmentor(nn.Module):
         # returns n x 100 embedding tensor
         embedding = torch.randn(n,100).to(device) # n x 100
         embedding = torch.mm(embedding,self.A.transpose(1,0)) + self.mean # n x 100
-        return embedding
+        return embedding.to(device)
 
     def forward(self,x,alpha=0.5,downsamples=0,embedding=None,useStylePredictor=True):
         # augments a batch of images with style randomization
@@ -73,6 +73,7 @@ class StyleAugmentor(nn.Module):
             # sample a random embedding
             embedding = self.sample_embedding(x.size(0))
         # interpolate style embeddings:
+        base = base.to(device)
         embedding = alpha*embedding + (1-alpha)*base
         
         restyled = self.ghiasi(x,embedding)
