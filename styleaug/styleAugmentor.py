@@ -26,8 +26,8 @@ class StyleAugmentor(nn.Module):
         checkpoint_embeddings = torch.load(join(dirname(__file__),'checkpoints/checkpoint_embeddings.pth'))
         
         # load weights for ghiasi and stylePredictor, and mean / covariance for the embedding distribution:
-        self.ghiasi.load_state_dict(checkpoint_ghiasi['state_dict_ghiasi'],strict=False)
-        self.stylePredictor.load_state_dict(checkpoint_stylepredictor['state_dict_stylepredictor'],strict=False)
+        self.ghiasi.load_state_dict(checkpoint_ghiasi['state_dict_ghiasi'],strict=False, map_location='cpu')
+        self.stylePredictor.load_state_dict(checkpoint_stylepredictor['state_dict_stylepredictor'],strict=False, map_location='cpu')
 
         # load mean imagenet embedding:
         self.imagenet_embedding = checkpoint_embeddings['imagenet_embedding_mean'] # mean style embedding for ImageNet
