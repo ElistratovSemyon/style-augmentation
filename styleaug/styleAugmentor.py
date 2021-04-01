@@ -72,8 +72,11 @@ class StyleAugmentor(nn.Module):
         if embedding is None:
             # sample a random embedding
             embedding = self.sample_embedding(x.size(0))
-        # interpolate style embeddings:
+        # interpolate style embeddingss
         base = base.to(device)
+        print(type(base))
+        print(type(embedding))
+        print(type(alpha))
         embedding = alpha*embedding + (1-alpha)*base
         
         restyled = self.ghiasi(x,embedding)
