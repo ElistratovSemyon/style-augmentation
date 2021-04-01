@@ -7,7 +7,8 @@ import numpy as np
 import sys
 from os.path import join, dirname
 
-device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+#device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+device = 'cpu'
 
 class StyleAugmentor(nn.Module):
     def __init__(self):
